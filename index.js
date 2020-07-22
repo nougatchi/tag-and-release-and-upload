@@ -22,13 +22,14 @@ async function run()
 		return response.data;
 	});
 	
-	if(!tag_exists)
-		octokit.git.createRef(
-		{ 
-			...context.repo, 
-			ref: `refs/tags/${version}`, 
-			sha: context.sha 
-		});
+	//if(!tag_exists)
+	//	octokit.git.createRef(
+	//	{ 
+	//		...context.repo, 
+	//		ref: `refs/tags/${version}`, 
+	//		sha: context.sha 
+	//	});
+		
 	
 	
 }
