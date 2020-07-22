@@ -13,6 +13,7 @@ function createTagIfNotExist()
 	octokit.paginate(octokit.repos.listTags, { ...context.repo },
 	(response, done) => 
 	{
+		console.log(`response.data: ${response.data}`);
 		if (response.data.find((tag) => tag.name == version))
 		{
 			tag_exists = true;
