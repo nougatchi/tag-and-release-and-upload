@@ -9,7 +9,7 @@ const context = github.context;
 
 
 //Create the tag if it doesn't exist
-var tag_exists = await octokit.paginate(octokit.repos.listTags, { ...context.repo },
+var tag_exists = octokit.paginate(octokit.repos.listTags, { ...context.repo },
 (response, done) => 
 {
 	if (response.data.find((tag) => tag.name == version))
