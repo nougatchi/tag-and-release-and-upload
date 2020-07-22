@@ -10,7 +10,7 @@ async function run()
 	const octokit = github.getOctokit(github_token);
 	const context = github.context;
 	
-	octokit.paginate(.repos.listTags, { ...context.repo },
+	octokit.paginate(octokit.repos.listTags, { ...context.repo },
 	(response, done) => 
 	{
 		//if (response.data.find((issues) => issue.body.includes("something")))
