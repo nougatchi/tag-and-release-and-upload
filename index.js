@@ -9,7 +9,7 @@ const context = github.context;
 
 
 //Create the tag if it doesn't exist
-var tag_exists = octokit.paginate(octokit.repos.listTags, { ...context.repo },
+var tag_exists = awaitt octokit.paginate(octokit.repos.listTags, { ...context.repo },
 (response, done) => 
 {
 	if (response.data.find((tag) => tag.name == version))
@@ -27,7 +27,7 @@ if(tag_exists)
 else
 {
 	console.log('Creating tag');
-	octokit.git.createRef(
+	await octokit.git.createRef(
 	{ 
 		...context.repo, 
 		ref: `refs/tags/${version}`, 
@@ -37,7 +37,7 @@ else
 
 
 //Create the release if it doesn't exist
-var release = octokit.repos.getReleaseByTag(
+var release = await octokit.repos.getReleaseByTag(
 {
   ...context.repo,
   tag: version
