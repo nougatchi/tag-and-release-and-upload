@@ -8,53 +8,57 @@ const octokit = github.getOctokit(github_token);
 const context = github.context;
 
 
-//Create the tag if it doesn't exist
-var tag_exists = octokit.paginate(octokit.repos.listTags, { ...context.repo },
-(response, done) => 
+async function run()
 {
-	if (response.data.find((tag) => tag.name == version))
+	//Create the tag if it doesn't exist
+	var tag_exists = await octokit.paginate(octokit.repos.listTags, { ...context.repo },
+	(response, done) => 
 	{
-		done();
-		return true;
-	}
-	return false;
-});
-
-if(tag_exists)
-{
-	console.log('Tag already exists');
-}
-else
-{
-	console.log('Creating tag');
-	octokit.git.createRef(
-	{ 
-		...context.repo, 
-		ref: `refs/tags/${version}`, 
-		sha: context.sha 
+		if (response.data.find((tag) => tag.name == version))
+		{
+			done();
+			return true;
+		}
+		return false;
 	});
-}		
+
+	if(tag_exists)
+	{
+		console.log('Tag already exists');
+	}
+	else
+	{
+		console.log('Creating tag');
+		await octokit.git.createRef(
+		{ 
+			...context.repo, 
+			ref: `refs/tags/${version}`, 
+			sha: context.sha 
+		});
+	}		
 
 
-//Create the release if it doesn't exist
-var release = await octokit.repos.getReleaseByTag(
-{
-  ...context.repo,
-  tag: version
-})
-.then(data => { return data })
-.catch(() => { return null });
+	//Create the release if it doesn't exist
+	var release = await octokit.repos.getReleaseByTag(
+	{
+	  ...context.repo,
+	  tag: version
+	})
+	.then(data => { return data })
+	.catch(() => { return null });
 
-console.log(release);	
-if(release)
-{
-	console.log('Release already exists');
+	console.log(release);	
+	if(release)
+	{
+		console.log('Release already exists');
+	}
+	else
+	{
+		console.log('Creating release');
+	}
 }
-else
-{
-	console.log('Creating release');
-}
 
+run();
 
 
 
