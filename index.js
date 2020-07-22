@@ -41,7 +41,7 @@ var release = octokit.repos.getReleaseByTag(
 {
   ...context.repo,
   tag: version
-}).catch();	
+}).catch(() => { });	
 console.log(`Release: ${release}`);
 
 if(release)
