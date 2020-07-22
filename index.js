@@ -44,7 +44,7 @@ try
 	{
 	  ...context.repo,
 	  tag: version
-	}).catch(() => { throw; });	
+	}).catch(() => { throw new Error(''); });	
 }
 catch { }
 
