@@ -27,7 +27,7 @@ if(tag_exists)
 else
 {
 	console.log('Creating tag');
-	await octokit.git.createRef(
+	octokit.git.createRef(
 	{ 
 		...context.repo, 
 		ref: `refs/tags/${version}`, 
