@@ -49,19 +49,19 @@ async function run()
 
 	if(release)
 	{
-		console.log('Release already exists');
-		console.log(release)
+		console.log('Release already exists');		
 	}
 	else
 	{
 		console.log('Creating release');
-		await octokit.repos.createRelease(
+		release = await octokit.repos.createRelease(
 		{
 			...context.repo,
 			tag_name: version
 		});
 	}
 	
+	console.log(release)
 	
 }
 
