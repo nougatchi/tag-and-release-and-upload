@@ -14,10 +14,12 @@ async function run()
 	octokit.paginate(octokit.repos.listTags, { ...context.repo },
 	(response, done) => 
 	{
-		//if (response.data.find((issues) => issue.body.includes("something")))
-		//{
-		//	done();
-		//}
+		if (response.data.find((tags) => tag.name == version))
+		{
+			console.log("Tag already exists");
+			tag_exists = true;
+			done();
+		}
 		console.log(response.data);
 		return response.data;
 	});
