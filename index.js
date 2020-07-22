@@ -7,6 +7,8 @@ console.log(`Version: ${version}`);
 const octokit = github.getOctokit(github_token);
 const context = github.context;
 
+
+//Create the tag if it doesn't exist
 var tag_exists = octokit.paginate(octokit.repos.listTags, { ...context.repo },
 (response, done) => 
 {
@@ -33,3 +35,11 @@ else
 	});
 }		
 
+
+//Create the release if it doesn't exist
+var release = octokit.repos.getReleaseByTag(
+{
+  ...context.repo,
+  tag: version
+});
+console.log(`Release: ${release}`);
