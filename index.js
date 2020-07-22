@@ -37,18 +37,21 @@ else
 
 
 //Create the release if it doesn't exist
-var release = null;
-try
+var release = octokit.repos.getReleaseByTag(
 {
-	release = octokit.repos.getReleaseByTag(
-	{
-	  ...context.repo,
-	  tag: version
-	});	
-}
-catch { }
+  ...context.repo,
+  tag: version
+}).catch();	
 console.log(`Release: ${release}`);
 
+if(release)
+{
+	console.log('Release already exists');
+}
+else
+{
+	
+}
 
 
 
