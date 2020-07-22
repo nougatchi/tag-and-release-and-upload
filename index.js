@@ -10,6 +10,7 @@ async function run()
 	const octokit = github.getOctokit(github_token);
 	const context = github.context;
 	
+	var tag_exists = false;
 	octokit.paginate(octokit.repos.listTags, { ...context.repo },
 	(response, done) => 
 	{
@@ -21,6 +22,8 @@ async function run()
 		return response.data;
 	});
 	
+	if(!tag_exists)
+		octokit.git.createRef({ ...context.repo, version, context.sha });
 	
 	
 }
