@@ -1,0 +1,24 @@
+{
+  "name": "tag-and-release",
+  "version": "1.0.0",
+  "description": "Creates a tag (if not exists), release (if not exists), uploads assets (if not exists), and publishes to nuget.dev (if not exists) based on the version string specified",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasondavis303/tag-and-release.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jasondavis303/tag-and-release/issues"
+  },
+  "homepage": "https://github.com/jasondavis303/tag-and-release#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/github": "^4.0.0"
+  }
+}
