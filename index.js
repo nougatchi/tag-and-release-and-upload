@@ -10,16 +10,15 @@ async function run()
 	const octokit = github.getOctokit(github_token);
 	const context = github.context;
 	
-	var tag_exists = false;
-	octokit.paginate(octokit.repos.listTags, { ...context.repo },
+	var tag_exists = octokit.paginate(octokit.repos.listTags, { ...context.repo },
 	(response, done) => 
 	{
 		if (response.data.find((tag) => tag.name == version))
 		{
-			tag_exists = true;
 			done();
+			return true;
 		}
-		return response.data;
+		return false;
 	});
 	
 	if(tag_exists)
