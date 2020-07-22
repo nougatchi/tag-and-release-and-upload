@@ -47,7 +47,6 @@ async function run()
 	.then(data => { return data })
 	.catch(() => { return null });
 
-	console.log(release);	
 	if(release)
 	{
 		console.log('Release already exists');
@@ -55,6 +54,11 @@ async function run()
 	else
 	{
 		console.log('Creating release');
+		await octokit.repos.createRelease(
+		{
+			...context.repo,
+			tag_name: version
+		});
 	}
 }
 
