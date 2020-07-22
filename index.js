@@ -46,7 +46,7 @@ octokit.repos.getReleaseByTag(
 {
 	console.log('Release already exists');
 	console.log(`Release: ${release}`);
-}
+})
 .catch(() => 
 {
 	console.log('Creating release');
