@@ -50,6 +50,7 @@ async function run()
 	if(release)
 	{
 		console.log('Release already exists');
+		console.log(release)
 	}
 	else
 	{
@@ -60,6 +61,8 @@ async function run()
 			tag_name: version
 		});
 	}
+	
+	
 }
 
 run();
