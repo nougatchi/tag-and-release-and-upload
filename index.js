@@ -16,21 +16,26 @@ async function run()
 	{
 		if (response.data.find((tag) => tag.name == version))
 		{
-			console.log('Tag already exists');
 			tag_exists = true;
 			done();
 		}
 		return response.data;
 	});
 	
-	//if(!tag_exists)
-	//	octokit.git.createRef(
-	//	{ 
-	//		...context.repo, 
-	//		ref: `refs/tags/${version}`, 
-	//		sha: context.sha 
-	//	});
-		
+	if(tag_exists)
+	{
+		console.log('Tag already exists');
+	}
+	else
+	{
+		console.log('Creating tag');
+		octokit.git.createRef(
+		{ 
+			...context.repo, 
+			ref: `refs/tags/${version}`, 
+			sha: context.sha 
+		});
+	}		
 	
 	
 }
