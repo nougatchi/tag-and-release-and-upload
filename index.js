@@ -23,7 +23,12 @@ async function run()
 	});
 	
 	if(!tag_exists)
-		octokit.git.createRef({ ...context.repo, `refs/tags/${version}`, context.sha });
+		octokit.git.createRef(
+		{ 
+			...context.repo, 
+			ref: `refs/tags/${version}`, 
+			sha: context.sha 
+		});
 	
 	
 }
