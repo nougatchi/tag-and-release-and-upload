@@ -79,7 +79,7 @@ async function run()
 		}
 		else
 		{
-			for(asset in newAssets)
+			for(var asset in newAssets)
 				toUpload.push(asset);
 		}
 		
