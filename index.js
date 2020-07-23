@@ -80,7 +80,6 @@ async function run()
 					if(candidate.data.name == curItem)
 					{
 						doUpload = false;
-						break;
 					}
 				});
 				if(doUpload)
