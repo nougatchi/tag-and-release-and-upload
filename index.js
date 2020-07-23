@@ -8,8 +8,19 @@ const context = github.context;
 const version = core.getInput('version', {required: true});
 console.log(`Version: ${version}`);
 
-
 async function run()
+{
+	try
+	{
+		await runn_inner();
+	}
+	catch (error)
+	{
+		core.setFailed(error.message);
+	}
+}
+
+async function run_inner()
 {
 	//Create the tag if it doesn't exist
 	var tag_exists = await octokit.paginate(octokit.repos.listTags, { ...context.repo },
@@ -22,7 +33,7 @@ async function run()
 		}
 		return false;
 	})
-	.catch(() => { throw new Error('Error checking for tag') });
+	.catch(() => { return false });
 
 	if(tag_exists)
 	{
@@ -36,8 +47,7 @@ async function run()
 			...context.repo, 
 			ref: `refs/tags/${version}`, 
 			sha: context.sha 
-		})
-		.catch(() => { throw new Error('Error creating tag') });
+		});
 	}		
 
 
@@ -61,8 +71,7 @@ async function run()
 		{
 			...context.repo,
 			tag_name: version
-		})
-		.catch(() => { throw new Error('Error creating release') });
+		});
 	}
 	
 	
@@ -95,8 +104,8 @@ async function run()
 			
 			var headers = { 'content-type': 'application/octet-stream', 'content-length': fs.statSync(newAsset).size };
 
-			await github.repos.uploadReleaseAsset(
-			{
+			await octokit.repos.uploadReleaseAsset
+			({
 				url: release.upload_url,
 				headers,
 				name: newAsset,
