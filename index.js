@@ -119,13 +119,11 @@ async function run_inner()
 				headers: { 'content-type': 'binary/octet-stream', 'content-length': fs.statSync(newAsset).size },
 				name: path.basename(newAsset),
 				data: fs.readFileSync(newAsset)
-			});
-			
-			console.log(asset);
-	
-		}
-		        
+			});	
+		}		        
     };
+	
+	
 	
 	
 	

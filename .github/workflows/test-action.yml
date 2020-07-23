@@ -10,10 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    
+    - run: date > date.txt
+    - run: zip data.zip date.txt
     - name: Test Action
       uses: ./
       with:
         version: v1.0.0
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        assets: '[ "info.zip", "binaries.zip" ]'
+        assets: '[ "data.zip" ]'
