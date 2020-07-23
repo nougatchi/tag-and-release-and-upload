@@ -68,7 +68,12 @@ async function run()
 	{
 		const jsonAssets = JSON.parse(assets);
 		console.log(jsonAssets);
-	}
+		
+		jsonAssets.forEach(item => 
+		{
+            console.log(item);
+        });        
+    });
 	//Upload assets
 	/*
 		releaseId = result.data.id;
