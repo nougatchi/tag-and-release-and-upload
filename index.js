@@ -72,34 +72,34 @@ async function run()
 	{
 		const newAssets = JSON.parse(assets);
 
-		const currAssets = await octokit.paginate(octokit.repos.listReleaseAssets, { ...context.repo, release_id: release.Id })
-		.then(data => {return data })
-		.catch(() => {return null });
+		//const currAssets = await octokit.paginate(octokit.repos.listReleaseAssets, { ...context.repo, release_id: release.Id })
+		//.then(data => {return data })
+		//.catch(() => {return null });
 		
-		if(currAssets)
-		{
+		//if(currAssets)
+		//{
 			
-		}
-		else
-		{
+		//}
+		//else
+		//{
 			// Upload all newAssets
 			
-		}
+		//}
 		
 		console.log(newAssets);
 		
 		for(var i in newAssets)
 		{
 			console.log(newAssets[i]);
-			if (!fs.existsSync(newAssets[i]))
-				throw new Error(`${newAssets[i]} file not found`);
+			//if (!fs.existsSync(newAssets[i]))
+			//	throw new Error(`${newAssets[i]} file not found`);
 			
-			await octokit.repos.uploadReleaseAsset(
-			{
-			  ...context.repo,
-			  release_id: release.Id,
-			  data: s.readFileSync(newAssets[i])
-			}).catch(() => { throw new Error('Could not upload ${newAsset}') });
+			//await octokit.repos.uploadReleaseAsset(
+			//{
+			//  ...context.repo,
+			//  release_id: release.Id,
+			//  data: s.readFileSync(newAssets[i])
+			//}).catch(() => { throw new Error('Could not upload ${newAsset}') });
 		}
 		        
     };
