@@ -83,7 +83,6 @@ async function run_inner()
 		const newAssets = JSON.parse(assets);
 
 		const currAssets = await octokit.paginate(octokit.repos.listReleaseAssets, { ...context.repo, release_id: release.Id })
-		.then(data => {return data })
 		.catch(() => {return null });
 		
 		console.log(currAssets);
