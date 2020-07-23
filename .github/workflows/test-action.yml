@@ -2,7 +2,7 @@ name: "Test the action"
 on:
   push:
     branches: 
-      - master
+      - master_pause
 
 jobs:
   
