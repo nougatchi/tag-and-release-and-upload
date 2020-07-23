@@ -76,7 +76,9 @@ async function run_inner()
 			target_commitish: context.sha
 		});
 	}
-		
+	
+	
+	//Upload assets
 	const assets = core.getInput('assets');
 	if(assets)
 	{
@@ -106,14 +108,15 @@ async function run_inner()
 		{
 			var newAsset = newAssets[i];
 			
-			console.log(newAsset);
+			console.log(`Uploading: ${newAsset}`);
+			
 			if (!fs.existsSync(newAsset))
 				throw new Error(`${newAssets} file not found`);
 			
 			var asset = await octokit.repos.uploadReleaseAsset
 			({
-				url: release.upload_url,
-				headers: { 'content-type': 'application/zip' },
+				url: release.data.upload_url,
+				headers: { 'content-type': 'binary/octet-stream', 'content-length': fs.statSync(newAsset).size },
 				name: path.basename(newAsset),
 				data: fs.readFileSync(newAsset)
 			});
