@@ -13,6 +13,9 @@ inputs:
     
   assets:
     description: json string array of assets paths to upload to the release. E.G. '[ "win-x64.zip", "linux-x24.zip" ]'
+    
+  overwrite:
+    description: bool value to overwrite assets
   
 runs:
   using: node12
