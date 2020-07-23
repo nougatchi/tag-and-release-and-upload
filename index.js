@@ -1,3 +1,4 @@
+const fs = require('fs');
 const core = require('@actions/core');
 const github = require('@actions/github');
 const github_token = core.getInput('github-token', {required: true});
@@ -72,37 +73,35 @@ async function run()
 		.then(data => {return data })
 		.catch(() => {return null });
 		
-		var toUpload = [];
 		if(currAssets)
 		{
 			
 		}
 		else
 		{
-			for(var asset in newAssets)
-				toUpload.push(asset);
+			// Upload all newAssets
+			
 		}
 		
 		console.log(toUpload);
 		
+		for(const newAsset in newAssets)
+		{
+			if (!fs.existsSync(newAsset))
+				throw new Error(`${newAsset} file not found`);
+			
+			await octokit.repos.uploadReleaseAsset(
+			{
+			  ...context.repo,
+			  release_id: release_id,
+			  data: s.readFileSync(newAsset)
+			});
+		}
 		        
     };
-	//Upload assets
-	/*
-		releaseId = result.data.id;
-
-        return octokit.request({
-          method: "POST",
-          url: result.data.upload_url,
-          headers: {
-            "content-type": "text/plain",
-          },
-          data: "Hello, world!\n",
-          name: "test-upload.txt",
-          label: "test",
-        });	
 	
-	*/
+	
+	
 	
 }
 
