@@ -83,7 +83,7 @@ async function run_inner()
 	if(assets)
 	{
 		const newAssets = JSON.parse(assets);
-		
+		const overwrite = core.getInput('overwrite');
 		if(release.data.assets)
 		{
 			for(var i in release.data.assets)
@@ -98,10 +98,24 @@ async function run_inner()
 					}
 				}
 				if(idx > -1)
-					newAssets.splice(idx, 1);
-				
+				{
+					if(overwrite)
+					{
+						var delResponse = await octokit.repos.deleteReleaseAsset
+						({
+							...context.repo,
+							asset_id: release.data.assets[i].id
+						});
+					}
+					else
+					{
+						newAssets.splice(idx, 1);
+					}
+				}
 			}
 		}
+		
+		
 		
 		
 		for(var i in newAssets)
