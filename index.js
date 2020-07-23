@@ -67,12 +67,30 @@ async function run()
 	if(assets)
 	{
 		const jsonAssets = JSON.parse(assets);
-		console.log(jsonAssets);
 		
-		jsonAssets.forEach(item => 
+		var toUpload = await octokit.paginate(octokit.repos.listReleaseAssets, { ...context.repo, release_id: release.Id })
+		.then((candidates) => 
 		{
-            console.log(item);
-        });        
+			var atl = [];
+			for(candidate in candidates)
+			{
+				var doUpload = true;
+				jsonAssets.forEach(curItem =>
+				{
+					if(candidate.data.name == curItem)
+					{
+						doUpload = false;
+						break;
+					}
+				});
+				if(doUpload)
+					atl.push(candidate);
+			}
+			return atl;
+		});
+		
+		console.log(toUpload);
+		        
     };
 	//Upload assets
 	/*
