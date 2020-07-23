@@ -86,11 +86,9 @@ async function run()
 			
 		//}
 		
-		console.log(newAssets);
-		
-		for(var i in newAssets)
+		for(const newAsset in newAssets)
 		{
-			console.log(newAssets[i]);
+			console.log(newAsset.toString());
 			//if (!fs.existsSync(newAssets[i]))
 			//	throw new Error(`${newAssets[i]} file not found`);
 			
