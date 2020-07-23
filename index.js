@@ -66,11 +66,11 @@ async function run()
 	const assets = core.getInput('assets');
 	if(assets)
 	{
-		var curAssets = await octokit.paginate(octokit.repos.listReleaseAssets, { ...context.repo, release_id: release.Id },
-		(response) => 
-		{
-			console.log(response.data);
-		});
+		var curAssets = await octokit.paginate(octokit.repos.listReleaseAssets, { ...context.repo, release_id: release.Id })
+		.then(data => {return data })
+		.catch(() => {return null });
+		
+		console.log(curAssets);
 		
 		const jsonAssets = JSON.parse(assets);
 		        
