@@ -1,5 +1,3 @@
-![Test the action](https://github.com/jasondavis303/tag-and-release/workflows/Test%20the%20action/badge.svg)
-
 # Tag and release and upload
 Creates a tag, release, and uploads assets based on the version string specified. But there are already dozens of these, including ones created by GitHub, right?  Well I did ths for 2 reasons. 
 
