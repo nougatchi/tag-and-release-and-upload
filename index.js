@@ -82,11 +82,27 @@ async function run_inner()
 	if(assets)
 	{
 		const newAssets = JSON.parse(assets);
-
-		const currAssets = await octokit.paginate(octokit.repos.listReleaseAssets, { ...context.repo, release_id: release.Id })
-		.catch(() => {return null });
+		console.log(`newAssets Before: ${newAssets}`);
+		if(release.data.assets)
+		{
+			for(var i in release.data.assets)
+			{
+				var idx = -1;
+				for(var j in newAssets)
+				{
+					if(release.data.assets[i].name == newAssets[j])
+					{
+						idx = j;
+						break;
+					}
+				}
+				if(idx > -1)
+					newAssets.splice(idx, 1);
+				
+			}
+		}
+		console.log(`newAssets After: ${newAssets}`);
 		
-		console.log(currAssets);
 		
 		//if(currAssets)
 		//{
