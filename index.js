@@ -76,9 +76,7 @@ async function run_inner()
 			target_commitish: context.sha
 		});
 	}
-	
-	console.log(release.data.assets);
-	
+		
 	const assets = core.getInput('assets');
 	if(assets)
 	{
@@ -115,7 +113,7 @@ async function run_inner()
 			await octokit.repos.uploadReleaseAsset
 			({
 				url: release.upload_url,
-				headers: { 'content-type': 'application/zip', 'content-length': fs.statSync(newAsset).size },
+				headers: { 'content-type': 'application/zip' },
 				name: path.basename(newAsset),
 				data: fs.readFileSync(newAsset)
 			});
