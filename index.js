@@ -5,8 +5,6 @@ const octokit = github.getOctokit(github_token);
 const context = github.context;
 
 const version = core.getInput('version', {required: true});
-const assets = core.getInput('assets');
-
 console.log(`Version: ${version}`);
 
 
@@ -63,12 +61,13 @@ async function run()
 		});
 	}
 	
-	if(assets.assets)
+	
+	
+	const assets = core.getInput('assets');
+	if(assets)
 	{
-		for (const file of assets)
-		{
-			console.log(file);
-		}
+		const jsonAssets = JSON.parse(assets);
+		console.log(jsonAssets);
 	}
 	//Upload assets
 	/*
