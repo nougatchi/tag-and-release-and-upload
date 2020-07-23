@@ -86,10 +86,11 @@ async function run()
 			
 		}
 		
-		console.log(toUpload);
+		console.log(newAssets);
 		
 		for(const newAsset in newAssets)
 		{
+			console.log(newAsset);
 			if (!fs.existsSync(newAsset))
 				throw new Error(`${newAsset} file not found`);
 			
