@@ -70,7 +70,9 @@ async function run_inner()
 		release = await octokit.repos.createRelease(
 		{
 			...context.repo,
-			tag_name: version
+			tag_name: version,
+			name: version,
+			target_commitish: context.sha
 		});
 	}
 	
