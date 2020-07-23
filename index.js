@@ -1,3 +1,4 @@
+const path = require('path');
 const fs = require('fs');
 const core = require('@actions/core');
 const github = require('@actions/github');
@@ -82,7 +83,7 @@ async function run_inner()
 	if(assets)
 	{
 		const newAssets = JSON.parse(assets);
-		console.log(`newAssets Before: ${newAssets}`);
+		
 		if(release.data.assets)
 		{
 			for(var i in release.data.assets)
@@ -101,36 +102,28 @@ async function run_inner()
 				
 			}
 		}
-		console.log(`newAssets After: ${newAssets}`);
 		
-		
-		//if(currAssets)
-		//{
-			
-		//}
-		//else
-		//{
-			// Upload all newAssets
-			
-		//}
 		
 		for(var i in newAssets)
 		{
 			var newAsset = newAssets[i];
+			
 			console.log(newAsset);
 			if (!fs.existsSync(newAsset))
 				throw new Error(`${newAssets} file not found`);
 			
 			var headers = { 'content-type': 'application/zip', 'content-length': fs.statSync(newAsset).size };
+			var data = fs.readFileSync(newAsset);
+			
 			console.log(headers);
 			
-			//await octokit.repos.uploadReleaseAsset
-			//({
-			//	url: release.upload_url,
-			//	headers,
-			//	name: newAsset,
-			//	file: fs.readFileSync(newAsset)
-			//});
+			await octokit.repos.uploadReleaseAsset
+			({
+				url: release.upload_url,
+				headers,
+				name: path.basepath(newAsset),
+				data: data
+			});
 	
 		}
 		        
