@@ -73,7 +73,7 @@ async function run()
 		{
             console.log(item);
         });        
-    });
+    };
 	//Upload assets
 	/*
 		releaseId = result.data.id;
