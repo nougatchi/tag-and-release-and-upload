@@ -4,11 +4,14 @@ Creates a tag, release, and uploads assets based on the version string specified
  1. To learn how to build GitHub workflows and actions
  2. This doesn't fail if something already exists! The logic is:
     - Check for existing tag
-    - Create it if it doesn't exist
+      - Create it if it doesn't exist
     - Check for existing release for the tag
-    - Create it if it doesn't exit
+      - Create it if it doesn't exit
     - Check for each specified asset in the release
-    - Upload it if it doesn't exist
+      - If the asset already exists
+        - if overwrite, then delete it and upload the new version
+      - else
+        - Upload
 
 I designed this to work with the actions [AssemblyInfo Version](https://github.com/marketplace/actions/assemblyinfo-version) and [.Net SDK Project file Version](https://github.com/marketplace/actions/net-sdk-project-file-version). The idea is if I want a new release, I can change the assembly version attribute in my Visual Studio project, and push.  This will create a new release when the version number changes, but will do nothing if the version already exists (instead of failing).
 
@@ -58,8 +61,8 @@ jobs:
           # Use the version from the previous step
           version: v${{ steps.get_version.outputs.ASSEMBLY_VERSION }}
           
-          
           assets: '[ "binaries.zip", "otherstuff.zip" ]'
+          overwrite: false          
 ```
 
 ## Inputs
@@ -69,3 +72,4 @@ Input | Description
 github-token | Needed to create tags, releases and uploads
 version | Version of the tag/release to create
 assets | Optional: json array of filenames to upload, relative to the root of the repository
+overwrite | Optional: weather to overwrite existing assets
