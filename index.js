@@ -110,7 +110,7 @@ async function run_inner()
 			if (!fs.existsSync(newAsset))
 				throw new Error(`${newAssets} file not found`);
 			
-			await octokit.repos.uploadReleaseAsset
+			var asset = await octokit.repos.uploadReleaseAsset
 			({
 				url: release.upload_url,
 				headers: { 'content-type': 'application/zip' },
