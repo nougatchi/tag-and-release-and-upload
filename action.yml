@@ -1,6 +1,6 @@
 name: Tag and Release
 author: Jason Davis
-description: Creates a tag (if not exists), release (if not exists), and uploads assets (if not exists) based on the version string specified
+description: Creates a tag, release, and uploads assets based on the version string specified
 
 inputs:
   github-token:
