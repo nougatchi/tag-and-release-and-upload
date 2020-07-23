@@ -117,6 +117,8 @@ async function run_inner()
 				name: path.basename(newAsset),
 				data: fs.readFileSync(newAsset)
 			});
+			
+			console.log(asset);
 	
 		}
 		        
