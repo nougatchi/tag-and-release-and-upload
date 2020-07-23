@@ -11,6 +11,10 @@ inputs:
     required: true
     description: Version to create
     
+  assets:
+    description: Assets to upload to the release
+    
+    
 runs:
   using: node12
   main: index.js

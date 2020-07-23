@@ -1,11 +1,13 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const github_token = core.getInput('github-token', {required: true});
-const version = core.getInput('version', {required: true});
-console.log(`Version: ${version}`);
-
 const octokit = github.getOctokit(github_token);
 const context = github.context;
+
+const version = core.getInput('version', {required: true});
+const assets = core.getInput('assets');
+
+console.log(`Version: ${version}`);
 
 
 async function run()
@@ -61,7 +63,23 @@ async function run()
 		});
 	}
 	
-	console.log(release)
+	assets.forEach(asset => console.log(asset));
+	//Upload assets
+	/*
+		releaseId = result.data.id;
+
+        return octokit.request({
+          method: "POST",
+          url: result.data.upload_url,
+          headers: {
+            "content-type": "text/plain",
+          },
+          data: "Hello, world!\n",
+          name: "test-upload.txt",
+          label: "test",
+        });	
+	
+	*/
 	
 }
 
