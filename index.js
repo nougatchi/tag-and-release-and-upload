@@ -12,7 +12,7 @@ async function run()
 {
 	try
 	{
-		await runn_inner();
+		await run_inner();
 	}
 	catch (error)
 	{
