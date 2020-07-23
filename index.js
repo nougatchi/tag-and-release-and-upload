@@ -93,12 +93,12 @@ async function run()
 			if (!fs.existsSync(newAsset))
 				throw new Error(`${newAssets} file not found`);
 			
-			//await octokit.repos.uploadReleaseAsset(
-			//{
-			//  ...context.repo,
-			//  release_id: release.Id,
-			//  data: s.readFileSync(newAssets[i])
-			//}).catch(() => { throw new Error('Could not upload ${newAsset}') });
+			await octokit.repos.uploadReleaseAsset(
+			{
+			  ...context.repo,
+			  release_id: release.Id,
+			  data: fs.readFileSync(newAsset)
+			}).catch(() => { throw new Error('Could not upload ${newAsset}') });
 		}
 		        
     };
