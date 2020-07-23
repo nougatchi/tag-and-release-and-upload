@@ -95,7 +95,7 @@ async function run()
 			  ...context.repo,
 			  release_id: release_id,
 			  data: s.readFileSync(newAsset)
-			});
+			}).catch(() => { throw new Error('Could not upload ${newAsset}') });
 		}
 		        
     };
