@@ -16,4 +16,5 @@ jobs:
       with:
         version: v1.0.0
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        
+                  - README.md
+          
