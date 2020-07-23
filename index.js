@@ -21,7 +21,8 @@ async function run()
 			return true;
 		}
 		return false;
-	});
+	})
+	.catch(() => { throw new Error('Error checking for tag') });
 
 	if(tag_exists)
 	{
@@ -35,7 +36,8 @@ async function run()
 			...context.repo, 
 			ref: `refs/tags/${version}`, 
 			sha: context.sha 
-		});
+		})
+		.catch(() => { throw new Error('Error creating tag') });
 	}		
 
 
@@ -59,7 +61,8 @@ async function run()
 		{
 			...context.repo,
 			tag_name: version
-		});
+		})
+		.catch(() => { throw new Error('Error creating release') });
 	}
 	
 	
