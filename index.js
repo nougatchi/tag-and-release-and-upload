@@ -86,11 +86,12 @@ async function run()
 			
 		//}
 		
-		for(const newAsset in newAssets)
+		for(var i in newAssets)
 		{
-			console.log(newAsset.toString());
-			//if (!fs.existsSync(newAssets[i]))
-			//	throw new Error(`${newAssets[i]} file not found`);
+			var newAsset = newAssets[i];
+			console.log(newAsset);
+			if (!fs.existsSync(newAsset))
+				throw new Error(`${newAssets} file not found`);
 			
 			//await octokit.repos.uploadReleaseAsset(
 			//{
