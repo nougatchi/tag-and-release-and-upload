@@ -63,7 +63,13 @@ async function run()
 		});
 	}
 	
-	assets.forEach(asset => console.log(asset));
+	if(assets.assets)
+	{
+		for (const file of assets)
+		{
+			console.log(file);
+		}
+	}
 	//Upload assets
 	/*
 		releaseId = result.data.id;
