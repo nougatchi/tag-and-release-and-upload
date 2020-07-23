@@ -23,24 +23,24 @@ async function run()
 async function run_inner()
 {
 	//Create the tag if it doesn't exist
-	//var tag_exists = await octokit.paginate(octokit.repos.listTags, { ...context.repo },
-	//(response, done) => 
-	//{
-	//	if (response.data.find((tag) => tag.name == version))
-	//	{
-	//		done();
-	//		return true;
-	//	}
-	//	return false;
-	//})
-	//.catch(() => { return false });
+	var tag_exists = await octokit.paginate(octokit.repos.listTags, { ...context.repo },
+	(response, done) => 
+	{
+		if (response.data.find((tag) => tag.name == version))
+		{
+			done();
+			return true;
+		}
+		return false;
+	})
+	.catch(() => { return false });
 
-	//if(tag_exists)
-	//{
-	//	console.log('Tag already exists');
-	//}
-	//else
-	//{
+	if(tag_exists)
+	{
+		console.log('Tag already exists');
+	}
+	else
+	{
 		console.log('Creating tag');
 		await octokit.git.createRef(
 		{ 
@@ -48,7 +48,7 @@ async function run_inner()
 			ref: `refs/tags/${version}`, 
 			sha: context.sha 
 		});
-	//}		
+	}		
 
 
 	//Create the release if it doesn't exist
@@ -106,14 +106,15 @@ async function run_inner()
 				throw new Error(`${newAssets} file not found`);
 			
 			var headers = { 'content-type': 'application/zip', 'content-length': fs.statSync(newAsset).size };
-
-			await octokit.repos.uploadReleaseAsset
-			({
-				url: release.upload_url,
-				headers,
-				name: newAsset,
-				file: fs.readFileSync(newAsset)
-			});
+			console.log(headers);
+			
+			//await octokit.repos.uploadReleaseAsset
+			//({
+			//	url: release.upload_url,
+			//	headers,
+			//	name: newAsset,
+			//	file: fs.readFileSync(newAsset)
+			//});
 	
 		}
 		        
