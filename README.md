@@ -46,12 +46,12 @@ jobs:
       # That way, to do a new release, just update the assembly version on the next commit
       - name: Get Assembly Version
         id: get_version
-        uses: jasondavis303/net-sdk-proj-file-version
+        uses: jasondavis303/net-sdk-proj-file-version@v1.0.0
         with: 
           PROJ_FILE: MyProject/MyProject.csproj        
       
       - name: Tag and Release
-        uses: jasondavis303/tag-and-release-and-upload
+        uses: jasondavis303/tag-and-release-and-upload@v1.0.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           
