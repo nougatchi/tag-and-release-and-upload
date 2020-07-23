@@ -76,6 +76,7 @@ async function run_inner()
 		});
 	}
 	
+	console.log(release);
 	
 	const assets = core.getInput('assets');
 	if(assets)
