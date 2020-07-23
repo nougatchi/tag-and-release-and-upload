@@ -97,7 +97,7 @@ async function run()
 			await octokit.repos.uploadReleaseAsset(
 			{
 			  ...context.repo,
-			  release_id: release_id,
+			  release_id: release.Id,
 			  data: s.readFileSync(newAssets[i])
 			}).catch(() => { throw new Error('Could not upload ${newAsset}') });
 		}
