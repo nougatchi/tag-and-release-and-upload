@@ -102,7 +102,7 @@ async function run_inner()
 			if (!fs.existsSync(newAsset))
 				throw new Error(`${newAssets} file not found`);
 			
-			var headers = { 'content-type': 'application/octet-stream', 'content-length': fs.statSync(newAsset).size };
+			var headers = { 'content-type': 'application/zip', 'content-length': fs.statSync(newAsset).size };
 
 			await octokit.repos.uploadReleaseAsset
 			({
