@@ -12,7 +12,7 @@ inputs:
     description: Version to create
     
   assets:
-    description: Assets to upload to the release
+    description: Array of assets  with `file` keys to upload to the release
     
     
 runs:
