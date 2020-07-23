@@ -55,8 +55,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           
-          # Use the version from the previous step (it outputs with a 'v' prefix: v1.2.3)
-          version: ${{ steps.get_version.outputs.ASSEMBLY_VERSION }}
+          # Use the version from the previous step
+          version: v${{ steps.get_version.outputs.ASSEMBLY_VERSION }}
           
           
           assets: '[ "binaries.zip", "otherstuff.zip" ]'
