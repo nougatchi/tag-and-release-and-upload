@@ -66,13 +66,25 @@ async function run()
 	const assets = core.getInput('assets');
 	if(assets)
 	{
-		var curAssets = await octokit.paginate(octokit.repos.listReleaseAssets, { ...context.repo, release_id: release.Id })
+		const newAssets = JSON.parse(assets);
+
+		const currAssets = await octokit.paginate(octokit.repos.listReleaseAssets, { ...context.repo, release_id: release.Id })
 		.then(data => {return data })
 		.catch(() => {return null });
 		
-		console.log(curAssets);
+		var toUpload = [];
+		if(currAssets)
+		{
+			
+		}
+		else
+		{
+			for(asset in newAssets)
+				toUpload.push(asset);
+		}
 		
-		const jsonAssets = JSON.parse(assets);
+		console.log(toUpload);
+		
 		        
     };
 	//Upload assets
