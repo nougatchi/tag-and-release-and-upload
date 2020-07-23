@@ -1,4 +1,4 @@
-name: Tag and Release
+name: Tag and Release and Upload
 author: Jason Davis
 description: Creates a tag, release, and uploads assets based on the version string specified
 
