@@ -18,8 +18,4 @@ jobs:
       with:
         version: v1.0.0
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        assets:
-          - file: 'LICENSE'
-            msg: 'LICENSE'
-          - file: 'README.md'
-            msg: 'README.md'
+        assets: '[ "LICENSE", "README.md" ]          
